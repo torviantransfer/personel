@@ -32,7 +32,7 @@ export default function NotificationPrompt() {
       </span>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold">Bildirimleri açın</p>
-        <p className="truncate text-xs text-white/55">Duyurulardan anında haberdar olun</p>
+        <p className="truncate text-xs text-white/55">Duyurulardan haberdar olun</p>
       </div>
       <button
         type="button"

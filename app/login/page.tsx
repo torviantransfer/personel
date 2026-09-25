@@ -62,7 +62,7 @@ export default function LoginPage() {
           className="stagger rounded-[28px] bg-white/[0.06] p-6 shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)] ring-1 ring-white/10 backdrop-blur-xl ring-inset [animation:card-in_.7s_.1s_cubic-bezier(.2,.8,.2,1)_both]"
         >
           <div className="mb-7 flex justify-center pt-1">
-            <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority className="h-auto w-48" />
+            <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority unoptimized className="h-auto w-48" />
           </div>
 
           <label className="relative block">

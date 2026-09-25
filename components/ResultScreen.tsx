@@ -18,10 +18,10 @@ const AUTO_CLOSE_MS = 3500;
 
 /** Ana ekranla aynı koyu tema; sonuca göre yeşil (giriş), mavi (çıkış) veya kırmızı (hata) ışıma. */
 const THEME = {
-  in: { glow: "bg-emerald-500/30", ring: "bg-emerald-400/25", solid: "bg-emerald-500", shadow: "shadow-[0_0_60px_-4px_rgb(16_185_129/0.8)]" },
-  out: { glow: "bg-primary/30", ring: "bg-primary/25", solid: "bg-primary", shadow: "shadow-[0_0_60px_-4px_rgb(22_119_255/0.8)]" },
-  error: { glow: "bg-rose-500/25", ring: "bg-rose-400/20", solid: "bg-rose-500", shadow: "shadow-[0_0_60px_-4px_rgb(244_63_94/0.7)]" },
-  loading: { glow: "bg-primary/20", ring: "bg-primary/15", solid: "bg-primary", shadow: "" },
+  in: { glow: "bg-[radial-gradient(130%_75%_at_50%_34%,rgb(16_185_129/0.32),rgb(16_185_129/0.08)_55%,transparent_80%)]", ring: "bg-emerald-400/25", solid: "bg-emerald-500", shadow: "shadow-[0_0_60px_-4px_rgb(16_185_129/0.8)]" },
+  out: { glow: "bg-[radial-gradient(130%_75%_at_50%_34%,rgb(22_119_255/0.34),rgb(22_119_255/0.08)_55%,transparent_80%)]", ring: "bg-primary/25", solid: "bg-primary", shadow: "shadow-[0_0_60px_-4px_rgb(22_119_255/0.8)]" },
+  error: { glow: "bg-[radial-gradient(130%_75%_at_50%_34%,rgb(244_63_94/0.26),rgb(244_63_94/0.07)_55%,transparent_80%)]", ring: "bg-rose-400/20", solid: "bg-rose-500", shadow: "shadow-[0_0_60px_-4px_rgb(244_63_94/0.7)]" },
+  loading: { glow: "bg-[radial-gradient(130%_75%_at_50%_40%,rgb(22_119_255/0.22),transparent_75%)]", ring: "bg-primary/15", solid: "bg-primary", shadow: "" },
 };
 
 export default function ResultScreen({ state, onDone, onRetry }: Props) {
@@ -42,7 +42,7 @@ export default function ResultScreen({ state, onDone, onRetry }: Props) {
       aria-modal="true"
       aria-live="assertive"
     >
-      <div aria-hidden className={`pointer-events-none absolute top-[30%] left-1/2 size-[440px] -translate-x-1/2 rounded-full blur-[120px] ${theme.glow}`} />
+      <div aria-hidden className={`pointer-events-none absolute inset-x-0 -top-24 -bottom-40 ${theme.glow}`} />
 
       <div className="relative mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center text-center">
         {state.kind === "loading" && (

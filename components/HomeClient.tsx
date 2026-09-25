@@ -137,9 +137,9 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, lastRec
     <div className="relative isolate flex min-h-dvh flex-col overflow-x-clip text-white">
       <DarkBackdrop />
 
-      <header className="safe-top px-5">
+      <header className="px-5 pt-[calc(env(safe-area-inset-top)+0.5rem)]">
         <div className="flex h-16 items-center justify-between">
-          <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority className="h-7 w-auto" />
+          <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority unoptimized className="h-7 w-auto" />
           <Link href="/profile" aria-label="Profil" className="tap flex rounded-full ring-2 ring-white/15">
             <Avatar name={fullName} src={avatarUrl} size="md" eager />
           </Link>

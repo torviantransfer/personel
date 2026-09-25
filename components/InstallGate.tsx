@@ -72,7 +72,7 @@ function InstallScreen() {
             <Image src="/icons/icon-512.png" alt="" width={96} height={96} priority className="drop-shadow-[0_18px_28px_rgb(22_119_255/0.35)]" />
           </div>
         </div>
-        <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority className="mt-8 h-8 w-auto [animation:rise_.6s_.1s_ease-out_both]" />
+        <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority unoptimized className="mt-8 h-8 w-auto [animation:rise_.6s_.1s_ease-out_both]" />
         <h1 className="mt-6 text-2xl font-bold tracking-tight [animation:rise_.6s_.15s_ease-out_both]">Uygulamayı yükleyin</h1>
         <p className="mt-2 max-w-72 text-[15px] leading-relaxed text-white/60 [animation:rise_.6s_.2s_ease-out_both]">
           MesaiGo yalnızca telefonunuzun ana ekranından kullanılabilir.
