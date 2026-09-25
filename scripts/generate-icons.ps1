@@ -55,6 +55,9 @@ New-Icon 192 "icon-192.png" "any" 1.0
 New-Icon 512 "icon-512.png" "any" 1.0
 New-Icon 32 "favicon-32.png" "any" 1.0
 New-Icon 180 "apple-touch-icon.png" "bleed" 1.24
+# iPhone bazı durumlarda ikonu kök dizinde arar
+Copy-Item (Join-Path $iconsOut "apple-touch-icon.png") (Join-Path $root "public/apple-touch-icon.png") -Force
+Copy-Item (Join-Path $iconsOut "apple-touch-icon.png") (Join-Path $root "public/apple-touch-icon-precomposed.png") -Force
 New-Icon 512 "maskable-512.png" "bleed" 0.92
 $src.Dispose()
 
