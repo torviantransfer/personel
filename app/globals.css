@@ -299,10 +299,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
  */
 @utility app-screen {
   position: fixed;
-  inset-inline: 0;
-  top: 0;
-  margin-inline: auto;
-  height: 100dvh;
+  inset: 0;
   overflow-y: auto;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
@@ -319,5 +316,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   to {
     transform: translateX(0);
+  }
+}
+
+/*
+ * Platforma göre kenar davranışı (-webkit-touch-callout yalnızca iOS'ta desteklenir).
+ *
+ * Android: durum çubuğu ve alt gezinme çubuğu siyah -> giriş kavisleri iki kenarda da koyulaşır.
+ * iOS:     durum çubuğu opak siyah, alt kısım ise ekranın dibine kadar çizilir ->
+ *          yalnızca üst kavis koyulaşır, alt kavis kenara kadar parlak kalır;
+ *          koyu ekranların en üstü siyah durum çubuğuyla birleşecek şekilde siyaha erir.
+ */
+.arc-fade {
+  -webkit-mask-image: var(--arc-fade);
+  mask-image: var(--arc-fade);
+}
+
+.ios-top-blend {
+  display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .arc-fade.arc-bottom {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .ios-top-blend {
+    display: block;
   }
 }

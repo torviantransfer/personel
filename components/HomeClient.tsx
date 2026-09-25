@@ -138,7 +138,7 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, phone, 
   }
 
   return (
-    <div className="app-screen isolate flex flex-col overflow-x-clip text-white">
+    <div className="app-screen isolate flex flex-col overflow-hidden text-white">
       <DarkBackdrop />
 
       <header className="px-5 pt-[calc(env(safe-area-inset-top)+0.5rem)]">
@@ -150,7 +150,7 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, phone, 
         </div>
       </header>
 
-      <section className="px-6 pt-5 [animation:rise_.5s_ease-out_both]">
+      <section className="px-6 pt-5 [animation:rise_.5s_ease-out_both] [@media(max-height:700px)]:pt-2">
         <p className="text-[15px] font-medium text-white/55">{greeting(now)},</p>
         <h1 className="mt-0.5 truncate text-[30px] leading-tight font-bold tracking-tight">{displayName}</h1>
         {workplaceName && <p className="mt-1 truncate text-sm font-medium text-white/45">{workplaceName}</p>}
@@ -178,18 +178,18 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, phone, 
         <NotificationPrompt />
       </section>
 
-      <div className="safe-bottom flex flex-1 items-center justify-center px-6 py-[min(2rem,4dvh)]">
+      <div className="safe-bottom flex flex-1 items-center justify-center px-6 py-[min(2rem,3dvh)]">
         <button
           type="button"
           onClick={() => openScanner()}
           aria-label="QR kodu okut"
-          className="group relative size-[min(16rem,66vw,44dvh)] rounded-full [animation:pop_.6s_.1s_cubic-bezier(.2,.9,.3,1.2)_both]"
+          className="group relative size-[min(16rem,66vw,37dvh)] rounded-full [@media(max-height:600px)]:size-[30dvh] [animation:pop_.6s_.1s_cubic-bezier(.2,.9,.3,1.2)_both]"
         >
           <span className="absolute inset-0 rounded-full bg-primary/30 [animation:ripple_2.6s_ease-out_infinite]" />
           <span className="absolute inset-0 rounded-full bg-primary/25 [animation:ripple_2.6s_ease-out_1.3s_infinite]" />
           <span className="absolute inset-0 rounded-full bg-primary shadow-[0_0_70px_-6px_rgb(22_119_255/0.8)] transition-transform duration-150 group-active:scale-95" />
           <span className="absolute inset-3 rounded-full border border-white/20" />
-          <span className="relative flex size-full flex-col items-center justify-center text-white transition-transform duration-150 group-active:scale-95">
+          <span className="relative flex size-full flex-col items-center justify-center text-white transition-transform duration-150 group-active:scale-95 [@media(max-height:600px)]:scale-[0.78]">
             <span className="relative size-[88px]">
               {["top-0 left-0 border-t-[3.5px] border-l-[3.5px] rounded-tl-xl", "top-0 right-0 border-t-[3.5px] border-r-[3.5px] rounded-tr-xl", "bottom-0 left-0 border-b-[3.5px] border-l-[3.5px] rounded-bl-xl", "right-0 bottom-0 border-r-[3.5px] border-b-[3.5px] rounded-br-xl"].map((c) => (
                 <span key={c} className={`absolute size-6 border-white ${c}`} />

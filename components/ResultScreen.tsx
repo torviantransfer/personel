@@ -37,7 +37,7 @@ export default function ResultScreen({ state, onDone, onRetry }: Props) {
 
   return (
     <div
-      className="h-app fixed inset-x-0 top-0 z-50 flex flex-col overflow-hidden bg-[#070b14] px-6 pt-[max(env(safe-area-inset-top),1.5rem)] pb-[max(env(safe-area-inset-bottom),1.5rem)] text-white [animation:fade_.2s_ease-out]"
+      className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-[#070b14] px-6 pt-[max(env(safe-area-inset-top),1.5rem)] pb-[max(env(safe-area-inset-bottom),1.5rem)] text-white [animation:fade_.2s_ease-out]"
       role="dialog"
       aria-modal="true"
       aria-live="assertive"

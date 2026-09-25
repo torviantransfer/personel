@@ -12,7 +12,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <>
       {isAdmin ? (
         <div className="isolate min-h-dvh bg-app text-ink">
-          <div aria-hidden className="h-app pointer-events-none fixed inset-x-0 top-0 -z-10 bg-app" />
+          <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-app" />
           <AppMain nav>{children}</AppMain>
         </div>
       ) : (

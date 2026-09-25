@@ -70,7 +70,7 @@ export default function EmployeeProfileView({ data, onBack, panel = false }: { d
       </header>
 
       <div className="stagger flex flex-1 flex-col px-5 pb-[max(env(safe-area-inset-bottom),1.25rem)]">
-        <section className="flex flex-col items-center pt-4 pb-8 text-center">
+        <section className="flex flex-col items-center pt-4 pb-8 text-center [@media(max-height:700px)]:pt-0 [@media(max-height:700px)]:pb-5">
           <span className="flex rounded-full p-1 shadow-[0_0_40px_-4px_rgb(22_119_255/0.55)] ring-2 ring-primary/50">
             <Avatar name={data.name} src={data.avatarUrl} size="xl" eager />
           </span>

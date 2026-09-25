@@ -162,8 +162,8 @@ function GlowArc({ position }: { position: "top" | "bottom" }) {
   return (
     <div
       aria-hidden
-      style={{ WebkitMaskImage: fade, maskImage: fade }}
-      className={`pointer-events-none absolute left-1/2 h-[46dvh] w-[170%] -translate-x-1/2 rounded-[50%] [animation:breathe_7s_ease-in-out_infinite] ${
+      style={{ ["--arc-fade" as string]: fade }}
+      className={`arc-fade ${top ? "" : "arc-bottom"} pointer-events-none absolute left-1/2 h-[46dvh] w-[170%] -translate-x-1/2 rounded-[50%] [animation:breathe_7s_ease-in-out_infinite] ${
         top
           ? "-top-[24dvh] border-b-2 border-sky-400/40 bg-[radial-gradient(ellipse_at_bottom,rgb(22_119_255/0.75),rgb(22_119_255/0.25)_45%,rgb(22_119_255/0.05)_75%)] shadow-[0_20px_80px_-10px_rgb(22_119_255/0.45)]"
           : "-bottom-[26dvh] border-t-2 border-sky-400/35 bg-[radial-gradient(ellipse_at_top,rgb(22_119_255/0.65),rgb(22_119_255/0.2)_45%,rgb(22_119_255/0.04)_75%)] shadow-[0_-20px_80px_-10px_rgb(22_119_255/0.4)] [animation-delay:-3.5s]"
