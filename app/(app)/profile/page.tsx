@@ -1,7 +1,6 @@
 import type { Viewport } from "next";
-import Link from "next/link";
-import { Building2, ChevronLeft, Hash, Phone, ShieldCheck, type LucideIcon } from "lucide-react";
-import DarkBackdrop from "@/components/DarkBackdrop";
+import { Building2, Hash, Phone, ShieldCheck, type LucideIcon } from "lucide-react";
+import EmployeeProfileView from "@/components/EmployeeProfileView";
 import LogoutButton from "@/components/LogoutButton";
 import PageHeader from "@/components/PageHeader";
 import { Avatar, Badge, Card, IconTile, SectionTitle } from "@/components/ui";
@@ -51,25 +50,18 @@ export default async function ProfilePage() {
   ];
 
   if (!isAdmin) {
-    const active = profile?.active;
-    const darkRows = rows.map((r) =>
-      r.label === "Hesap Durumu"
-        ? {
-            ...r,
-            value: (
-              <span
-                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${
-                  active ? "bg-emerald-400/10 text-emerald-300 ring-emerald-400/25" : "bg-rose-400/10 text-rose-300 ring-rose-400/25"
-                }`}
-              >
-                <span className={`size-1.5 rounded-full ${active ? "bg-emerald-400" : "bg-rose-400"}`} />
-                {active ? "Aktif" : "Pasif"}
-              </span>
-            ),
-          }
-        : r,
+    return (
+      <EmployeeProfileView
+        data={{
+          name,
+          avatarUrl,
+          phone: formatPhone(profile?.phone),
+          employeeNumber: profile?.employee_number ?? null,
+          workplaceName: profile?.workplace_name ?? null,
+          active: Boolean(profile?.active),
+        }}
+      />
     );
-    return <EmployeeProfile name={name} avatarUrl={avatarUrl} rows={darkRows} />;
   }
 
   return (
@@ -108,57 +100,3 @@ export default async function ProfilePage() {
   );
 }
 
-/** Personel profili: ana ekranla aynı koyu tema. */
-function EmployeeProfile({
-  name,
-  avatarUrl,
-  rows,
-}: {
-  name: string;
-  avatarUrl: string | null;
-  rows: { icon: LucideIcon; label: string; value: React.ReactNode }[];
-}) {
-  return (
-    <div className="app-screen isolate flex flex-col text-white">
-      <DarkBackdrop />
-
-      <header className="safe-top px-5">
-        <div className="flex h-16 items-center">
-          <Link
-            href="/"
-            className="tap -ml-1 flex h-10 items-center gap-1 rounded-full bg-white/[0.07] pr-4 pl-2.5 text-sm font-semibold text-white/90 ring-1 ring-white/10 ring-inset"
-          >
-            <ChevronLeft className="size-5" />
-            Ana Sayfa
-          </Link>
-        </div>
-      </header>
-
-      <div className="stagger flex flex-1 flex-col px-5 pb-[max(env(safe-area-inset-bottom),1.25rem)]">
-        <section className="flex flex-col items-center pt-4 pb-8 text-center">
-          <span className="flex rounded-full p-1 ring-2 ring-primary/50 shadow-[0_0_40px_-4px_rgb(22_119_255/0.55)]">
-            <Avatar name={name} src={avatarUrl} size="xl" eager />
-          </span>
-          <h1 className="mt-5 text-[26px] leading-tight font-bold tracking-tight">{name}</h1>
-          <span className="mt-2 rounded-full bg-white/[0.07] px-3 py-1 text-xs font-semibold text-white/70 ring-1 ring-white/10 ring-inset">Personel</span>
-        </section>
-
-        <ul className="divide-y divide-white/10 overflow-hidden rounded-2xl bg-white/[0.06] ring-1 ring-white/10 backdrop-blur-md ring-inset">
-          {rows.map(({ icon: Icon, label, value }) => (
-            <li key={label} className="flex items-center gap-3.5 px-4 py-3.5">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/20 text-sky-300">
-                <Icon className="size-[18px]" />
-              </span>
-              <span className="flex-1 text-[15px] text-white/60">{label}</span>
-              <span className="max-w-[55%] truncate text-right text-[15px] font-semibold">{value}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-auto pt-8">
-          <LogoutButton dark />
-        </div>
-      </div>
-    </div>
-  );
-}

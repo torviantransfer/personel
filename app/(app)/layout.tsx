@@ -1,6 +1,5 @@
 import AppMain from "@/components/AppMain";
 import BottomNav from "@/components/BottomNav";
-import StatusBarScrim from "@/components/StatusBarScrim";
 import { getSession } from "@/lib/auth";
 
 // Oturuma bağlı sayfalar: her zaman istek anında çalışır, build sırasında önceden derlenmez.
@@ -20,7 +19,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <AppMain nav={false}>{children}</AppMain>
       )}
       {isAdmin && <BottomNav />}
-      {isAdmin && <StatusBarScrim />}
     </>
   );
 }

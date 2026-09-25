@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CalendarDays, Clock3, QrCode } from "lucide-react";
 import DarkBackdrop from "@/components/DarkBackdrop";
+import EmployeeProfileView from "@/components/EmployeeProfileView";
 import NotificationPrompt from "@/components/NotificationPrompt";
 import QrScanner from "@/components/QrScanner";
 import ResultScreen, { type ResultState } from "@/components/ResultScreen";
@@ -20,6 +20,9 @@ type Props = {
   fullName: string;
   avatarUrl: string | null;
   workplaceName: string | null;
+  phone: string;
+  employeeNumber: string | null;
+  active: boolean;
   lastRecord: AttendanceRecord | null;
   serverNow: number;
 };
@@ -49,12 +52,13 @@ function farewell(iso: string) {
   return h >= 17 || h < 5 ? "İyi akşamlar" : "İyi günler";
 }
 
-export default function HomeClient({ fullName, avatarUrl, workplaceName, lastRecord, serverNow }: Props) {
+export default function HomeClient({ fullName, avatarUrl, workplaceName, phone, employeeNumber, active, lastRecord, serverNow }: Props) {
   const router = useRouter();
   const [now, setNow] = useState(serverNow);
   const [last, setLast] = useState(lastRecord);
   const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState<ResultState | null>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const busyRef = useRef(false);
   const lastScanRef = useRef(0);
   const displayName = titleCase(fullName);
@@ -140,9 +144,9 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, lastRec
       <header className="px-5 pt-[calc(env(safe-area-inset-top)+0.5rem)]">
         <div className="flex h-16 items-center justify-between">
           <Image src="/brand/mesaigo-white.png" alt="MesaiGo" width={720} height={146} priority unoptimized className="h-7 w-auto" />
-          <Link href="/profile" aria-label="Profil" className="tap flex rounded-full ring-2 ring-white/15">
+          <button type="button" onClick={() => setProfileOpen(true)} aria-label="Profil" className="tap flex rounded-full ring-2 ring-white/15">
             <Avatar name={fullName} src={avatarUrl} size="md" eager />
-          </Link>
+          </button>
         </div>
       </header>
 
@@ -199,6 +203,13 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, lastRec
         </button>
       </div>
 
+      {profileOpen && (
+        <EmployeeProfileView
+          panel
+          onBack={() => setProfileOpen(false)}
+          data={{ name: displayName, avatarUrl, phone, employeeNumber, workplaceName, active }}
+        />
+      )}
       {scanning && <QrScanner onDetected={handleDetected} onError={handleCameraError} onClose={() => setScanning(false)} />}
       {result && <ResultScreen state={result} onDone={() => setResult(null)} onRetry={() => openScanner(true)} />}
     </div>

@@ -282,23 +282,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /*
- * Tam ekran yüksekliği.
- * iOS'ta ana ekrandan açılan uygulamada (black-translucent durum çubuğu) 100dvh,
- * durum çubuğu yüksekliği kadar kısa hesaplanır ve ekranın altında boş şerit kalır.
- * Yalnızca iOS'ta (-webkit-touch-callout) bu pay eklenir; Safari tarayıcıda inset 0 olduğundan etkisi yoktur.
+ * Tam ekran yüksekliği. Durum çubuğu opak ("black") olduğu için iOS'ta da 100dvh doğrudur;
+ * "black-translucent" kullanılırsa iOS 26 ekranın altında çizilemeyen bir şerit bırakır.
  */
 @utility min-h-app {
   min-height: 100dvh;
-  @supports (-webkit-touch-callout: none) {
-    min-height: calc(100dvh + env(safe-area-inset-top));
-  }
 }
 
 @utility h-app {
   height: 100dvh;
-  @supports (-webkit-touch-callout: none) {
-    height: calc(100dvh + env(safe-area-inset-top));
-  }
 }
 
 /*
@@ -314,15 +306,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   overflow-y: auto;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
-  @supports (-webkit-touch-callout: none) {
-    height: calc(100dvh + env(safe-area-inset-top));
-  }
 }
 
-/* Sabit alt öğeler için gerçek ekran altı (iOS kısa görünüm alanı payı) */
+/* Sabit alt öğeler için ekran altı */
 @utility bottom-screen {
   bottom: 0;
-  @supports (-webkit-touch-callout: none) {
-    bottom: calc(-1 * env(safe-area-inset-top));
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

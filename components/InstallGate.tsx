@@ -44,9 +44,10 @@ export default function InstallGate({ children }: { children: React.ReactNode })
     () => (BYPASS ? "app" : "pending"),
   );
 
-  if (mode === "app") return children;
-  if (mode === "pending") return <div className="app-screen bg-[#070b14]" />;
-  return <InstallScreen />;
+  // Sunucudan gelen sayfa hemen gösterilir (JS yüklenmesini beklerken siyah ekran olmasın);
+  // tarayıcıda açıldığı anlaşılırsa kurulum ekranına geçilir.
+  if (mode === "browser") return <InstallScreen />;
+  return children;
 }
 
 type Platform = "ios" | "android" | "desktop";

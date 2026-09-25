@@ -12,8 +12,9 @@ export const metadata: Metadata = {
   description: "MesaiGo · Personel giriş-çıkış takip sistemi",
   applicationName: "MesaiGo",
   manifest: "/manifest.webmanifest",
-  // Koyu personel ekranları için şeffaf durum çubuğu; açık yönetici sayfalarında StatusBarScrim koyu şerit çizer.
-  appleWebApp: { capable: true, title: "MesaiGo", statusBarStyle: "black-translucent" },
+  // Opak siyah durum çubuğu. iOS 26'da "black-translucent" görünüm alanını kaydırıp ekranın altında
+  // çizilemeyen bir şerit bırakıyor; "black" ile uygulama durum çubuğunun altından başlayıp ekranın dibine uzanır.
+  appleWebApp: { capable: true, title: "MesaiGo", statusBarStyle: "black" },
   // Uygulama arama motorlarında listelenmez.
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
   formatDetection: { telephone: false, date: false, address: false, email: false },
