@@ -43,11 +43,22 @@ export function isValidSubscription(v: unknown): v is PushSubscription {
 
 export async function saveSubscription(userId: string, sub: PushSubscription) {
   await ensureBucket();
+  const storage = createAdminClient().storage.from(BUCKET);
   const body = JSON.stringify({ endpoint: sub.endpoint, keys: { p256dh: sub.keys.p256dh, auth: sub.keys.auth } });
-  const { error } = await createAdminClient()
-    .storage.from(BUCKET)
-    .upload(fileFor(userId, sub.endpoint), new Blob([body], { type: "application/json" }), { upsert: true, contentType: "application/json" });
+  const target = fileFor(userId, sub.endpoint);
+  const { error } = await storage.upload(target, new Blob([body], { type: "application/json" }), { upsert: true, contentType: "application/json" });
   if (error) throw error;
+
+  // Her hesap tek cihaza bağlıdır: aynı telefonda uygulama yeniden kurulunca ya da Chrome ile uygulama
+  // ayrı kayıt açınca çift bildirim gitmesin. Hesabın eski cihaz kayıtları silinir.
+  const fileName = target.split("/")[1];
+  const { data: own } = await storage.list(userId, { limit: 100 });
+  const oldOwn = (own ?? []).map((f) => f.name).filter((name) => name !== fileName);
+  // Aynı cihaz yalnızca son giriş yapılan hesaba bağlı olsun (telefonda hesap değiştirilince)
+  const { data: folders } = await storage.list("", { limit: 1000 });
+  const others = (folders ?? []).map((f) => f.name).filter((name) => name !== userId && /^[0-9a-f-]{36}$/i.test(name));
+  const remove = [...oldOwn.map((name) => `${userId}/${name}`), ...others.map((id) => `${id}/${fileName}`)];
+  if (remove.length) await storage.remove(remove);
 }
 
 export async function removeSubscription(userId: string, endpoint: string) {
@@ -81,16 +92,24 @@ export async function sendToUsers(userIds: string[], payload: PushPayload): Prom
   let sent = 0;
   const stale: string[] = [];
 
+  // Aynı cihaz (endpoint) birden fazla hesapta kayıtlıysa tek bildirim gönderilir
+  const byEndpoint = new Map<string, { paths: string[]; sub: PushSubscription }>();
+  for (const list of await Promise.all(userIds.map(listSubscriptions))) {
+    for (const { path, sub } of list) {
+      const entry = byEndpoint.get(sub.endpoint);
+      if (entry) entry.paths.push(path);
+      else byEndpoint.set(sub.endpoint, { paths: [path], sub });
+    }
+  }
+
   await Promise.all(
-    userIds.map(async (id) => {
-      for (const { path, sub } of await listSubscriptions(id)) {
-        try {
-          await webpush.sendNotification(sub, message, { TTL: 60 * 60 * 24, urgency: "high" });
-          sent++;
-        } catch (err) {
-          const status = (err as { statusCode?: number }).statusCode;
-          if (status === 404 || status === 410) stale.push(path);
-        }
+    [...byEndpoint.values()].map(async ({ paths, sub }) => {
+      try {
+        await webpush.sendNotification(sub, message, { TTL: 60 * 60 * 24, urgency: "high" });
+        sent++;
+      } catch (err) {
+        const status = (err as { statusCode?: number }).statusCode;
+        if (status === 404 || status === 410) stale.push(...paths);
       }
     }),
   );
