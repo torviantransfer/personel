@@ -6,6 +6,9 @@ import { requireAdmin } from "@/lib/auth";
 import { qrSvg } from "@/lib/qr";
 import { getWorkplace } from "@/services/admin";
 
+// Oturuma bağlı sayfalar: her zaman istek anında çalışır, build sırasında önceden derlenmez.
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "QR Yazdır" };
 
 /** A4'e yazdırılacak QR sayfası (alt menü olmadan). */

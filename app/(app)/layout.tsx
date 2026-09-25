@@ -3,6 +3,9 @@ import BottomNav from "@/components/BottomNav";
 import StatusBarScrim from "@/components/StatusBarScrim";
 import { getSession } from "@/lib/auth";
 
+// Oturuma bağlı sayfalar: her zaman istek anında çalışır, build sırasında önceden derlenmez.
+export const dynamic = "force-dynamic";
+
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { isAdmin } = await getSession();
   // Personel tek ekranlı uygulama kullanır; alt menü yalnızca yönetici panelinde.
