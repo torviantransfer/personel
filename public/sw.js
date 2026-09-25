@@ -1,6 +1,6 @@
 // MesaiGo - Service Worker
 // Kimlik doğrulamalı sayfalar ve API asla önbelleğe alınmaz; yalnızca statik dosyalar.
-const CACHE = "mesaigo-static-v8";
+const CACHE = "mesaigo-static-v9";
 const PRECACHE = ["/offline.html", "/icons/icon-192.png", "/icons/icon-512.png", "/icons/apple-touch-icon.png", "/brand/mesaigo-dark.png", "/brand/mesaigo-white.png"];
 
 self.addEventListener("install", (event) => {

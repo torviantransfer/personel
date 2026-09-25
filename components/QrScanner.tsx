@@ -74,7 +74,7 @@ export default function QrScanner({ onDetected, onError, onClose }: Props) {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#070b14] text-white" role="dialog" aria-modal="true" aria-label="QR Kodunu Tara">
+    <div className="h-app fixed inset-x-0 top-0 z-50 bg-[#070b14] text-white" role="dialog" aria-modal="true" aria-label="QR Kodunu Tara">
       <video ref={videoRef} className="absolute inset-0 size-full object-cover" playsInline muted autoPlay />
 
       {/* Karartma + ortada kare pencere */}

@@ -12,7 +12,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <>
       {isAdmin ? (
-        <div className="min-h-dvh bg-app text-ink">
+        <div className="min-h-app bg-app text-ink">
           <AppMain nav>{children}</AppMain>
         </div>
       ) : (

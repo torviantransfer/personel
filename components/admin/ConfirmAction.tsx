@@ -56,7 +56,7 @@ export default function ConfirmAction({ action, fields, icon: Icon, label, title
 
       {open &&
         createPortal(
-          <div className="fixed inset-0 z-[60] flex items-end justify-center sm:items-center" role="dialog" aria-modal="true">
+          <div className="h-app fixed inset-x-0 top-0 z-[60] flex items-end justify-center sm:items-center" role="dialog" aria-modal="true">
             <button type="button" aria-label="Kapat" className="absolute inset-0 bg-slate-900/45 [animation:fade_.2s_ease-out]" onClick={() => setOpen(false)} />
             <form
               action={formAction}

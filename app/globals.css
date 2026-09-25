@@ -64,6 +64,9 @@ body {
 
 body {
   min-height: 100dvh;
+  @supports (-webkit-touch-callout: none) {
+    min-height: calc(100dvh + env(safe-area-inset-top));
+  }
   font-family: var(--font-sans);
   font-feature-settings: "cv11", "ss01", "tnum" 0;
   -webkit-font-smoothing: antialiased;
@@ -273,5 +276,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   50% {
     opacity: 1;
     transform: scale(1.05);
+  }
+}
+
+/*
+ * Tam ekran yüksekliği.
+ * iOS'ta ana ekrandan açılan uygulamada (black-translucent durum çubuğu) 100dvh,
+ * durum çubuğu yüksekliği kadar kısa hesaplanır ve ekranın altında boş şerit kalır.
+ * Yalnızca iOS'ta (-webkit-touch-callout) bu pay eklenir; Safari tarayıcıda inset 0 olduğundan etkisi yoktur.
+ */
+@utility min-h-app {
+  min-height: 100dvh;
+  @supports (-webkit-touch-callout: none) {
+    min-height: calc(100dvh + env(safe-area-inset-top));
+  }
+}
+
+@utility h-app {
+  height: 100dvh;
+  @supports (-webkit-touch-callout: none) {
+    height: calc(100dvh + env(safe-area-inset-top));
   }
 }

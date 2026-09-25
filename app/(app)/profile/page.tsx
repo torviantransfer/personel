@@ -119,7 +119,7 @@ function EmployeeProfile({
   rows: { icon: LucideIcon; label: string; value: React.ReactNode }[];
 }) {
   return (
-    <div className="relative isolate flex min-h-dvh flex-col text-white">
+    <div className="relative isolate flex min-h-app flex-col text-white">
       <DarkBackdrop />
 
       <header className="safe-top px-5">
