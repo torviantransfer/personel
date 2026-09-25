@@ -22,8 +22,8 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
   const svg = await qrSvg(workplace.qr_token);
 
   return (
-    <div className="min-h-app bg-white text-ink">
-    <main className="safe-top mx-auto flex min-h-app max-w-2xl flex-col bg-white px-6 pb-10 print:min-h-0 print:p-0">
+    <div className="min-h-dvh bg-white text-ink">
+    <main className="safe-top mx-auto flex min-h-dvh max-w-2xl flex-col bg-white px-6 pb-10 print:min-h-0 print:p-0">
       <div className="flex items-center justify-between py-2 print:hidden">
         <Link href={`/admin/workplaces/${workplace.id}`} className="-ml-2 inline-flex h-10 items-center gap-0.5 pr-3 text-[15px] font-medium text-primary">
           <ChevronLeft className="size-5" />

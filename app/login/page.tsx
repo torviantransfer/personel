@@ -50,12 +50,12 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="relative isolate min-h-app overflow-hidden text-white">
+    <main className="app-screen isolate overflow-x-hidden text-white">
       <DarkBackdrop />
       <GlowArc position="top" />
       <GlowArc position="bottom" />
 
-      <div className="relative mx-auto flex min-h-app max-w-md flex-col justify-center px-6 pt-[max(env(safe-area-inset-top),2rem)] pb-[max(env(safe-area-inset-bottom),3.5rem)]">
+      <div className="relative mx-auto flex min-h-full max-w-md flex-col justify-center px-6 pt-[max(env(safe-area-inset-top),2rem)] pb-[max(env(safe-area-inset-bottom),3.5rem)]">
         <form
           onSubmit={onSubmit}
           noValidate

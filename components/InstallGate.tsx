@@ -45,7 +45,7 @@ export default function InstallGate({ children }: { children: React.ReactNode })
   );
 
   if (mode === "app") return children;
-  if (mode === "pending") return <div className="min-h-app bg-[#070b14]" />;
+  if (mode === "pending") return <div className="app-screen bg-[#070b14]" />;
   return <InstallScreen />;
 }
 
@@ -62,7 +62,7 @@ function InstallScreen() {
   const [platform] = useState<Platform>(detectPlatform);
 
   return (
-    <main className="relative isolate flex min-h-app flex-col items-center overflow-x-clip px-6 pt-[max(env(safe-area-inset-top),2rem)] pb-[max(env(safe-area-inset-bottom),2rem)] text-center text-white">
+    <main className="app-screen isolate flex flex-col items-center overflow-x-clip px-6 pt-[max(env(safe-area-inset-top),2rem)] pb-[max(env(safe-area-inset-bottom),2rem)] text-center text-white">
       <DarkBackdrop />
 
       <div className="flex flex-1 flex-col items-center justify-center">

@@ -134,7 +134,7 @@ export default function HomeClient({ fullName, avatarUrl, workplaceName, lastRec
   }
 
   return (
-    <div className="relative isolate flex min-h-app flex-col overflow-x-clip text-white">
+    <div className="app-screen isolate flex flex-col overflow-x-clip text-white">
       <DarkBackdrop />
 
       <header className="px-5 pt-[calc(env(safe-area-inset-top)+0.5rem)]">

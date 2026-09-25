@@ -18,7 +18,7 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-line/80 bg-white/90 backdrop-blur-xl print:hidden">
+    <nav className="safe-bottom bottom-screen fixed inset-x-0 z-40 border-t border-line/80 bg-white/90 backdrop-blur-xl print:hidden">
       <ul className="mx-auto flex max-w-lg px-2">
         {ITEMS.map(({ href, label, Icon }) => {
           const active = EXACT.has(href) ? pathname === href : pathname.startsWith(href);

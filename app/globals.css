@@ -51,6 +51,11 @@
   }
 }
 
+html {
+  /* Çift dokunuşla yakınlaştırmayı kapatır (iOS) */
+  touch-action: manipulation;
+}
+
 html,
 body {
   /* Personel ekranları koyu; açık zeminli yönetici paneli kendi arka planını verir */
@@ -64,9 +69,6 @@ body {
 
 body {
   min-height: 100dvh;
-  @supports (-webkit-touch-callout: none) {
-    min-height: calc(100dvh + env(safe-area-inset-top));
-  }
   font-family: var(--font-sans);
   font-feature-settings: "cv11", "ss01", "tnum" 0;
   -webkit-font-smoothing: antialiased;
@@ -296,5 +298,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 100dvh;
   @supports (-webkit-touch-callout: none) {
     height: calc(100dvh + env(safe-area-inset-top));
+  }
+}
+
+/*
+ * Ekrana sabitlenmiş tam ekran uygulama ekranı (personel ekranları).
+ * Belge kaydırılmaz; içerik gerekirse kendi içinde kayar. iOS'ta ekranın dibine kadar uzanır.
+ */
+@utility app-screen {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  margin-inline: auto;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  @supports (-webkit-touch-callout: none) {
+    height: calc(100dvh + env(safe-area-inset-top));
+  }
+}
+
+/* Sabit alt öğeler için gerçek ekran altı (iOS kısa görünüm alanı payı) */
+@utility bottom-screen {
+  bottom: 0;
+  @supports (-webkit-touch-callout: none) {
+    bottom: calc(-1 * env(safe-area-inset-top));
   }
 }
